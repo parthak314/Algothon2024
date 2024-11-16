@@ -51,8 +51,12 @@ def search_messages():
                     message = match
                     file_name = message['text']
                     print(f"Found a message with file reference: {file_name}")
+                    client.chat_postMessage(
+                        channel='C080P6M4DKL',
+                        text="Data has just been released 'release_5979.crypt' the passcode is 'WlWDzEj1WRNCDDzF'. Please make a forecast. [Internal Check: 2024-11-16 23:10]"
+                    )
                     return file_name
-            
+
 
         else:
             print("No recent messages with the specified file keyword.")
