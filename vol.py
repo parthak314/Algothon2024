@@ -45,11 +45,13 @@ def search_messages():
         response = client.search_all(query=query, count=1, sort="timestamp", sort_dir="desc")
         
         if response['messages']['matches']:
-            if response['messages']['matches'][0]['user']=='U080GCRATP1':
+            i=0
+            while response['messages']['matches'][0]['user']!='U080GCRATP1':
+                i+=1
                 # Get the latest matching message
-                message = response['messages']['matches'][0]
-                file_name = message['text']
-                print(f"Found a message with file reference: {file_name}")
+            message = response['messages']['matches'][0]
+            file_name = message['text']
+            print(f"Found a message with file reference: {file_name}")
             
             
             # Process the message or file here
