@@ -45,10 +45,11 @@ def search_messages():
         response = client.search_all(query=query, count=1, sort="timestamp", sort_dir="desc")
         
         if response['messages']['matches']:
-            # Get the latest matching message
-            message = response['messages']['matches'][0]
-            file_name = message['text']
-            print(f"Found a message with file reference: {file_name}")
+            if response['messages']['matches'][0]['user']=='U080GCRATP1':
+                # Get the latest matching message
+                message = response['messages']['matches'][0]
+                file_name = message['text']
+                print(f"Found a message with file reference: {file_name}")
             
             
             # Process the message or file here
@@ -367,8 +368,8 @@ if __name__ == "__main__":
     print("Starting initial analysis...")
     
     # Schedule the task to run every 19 minutes
-    schedule.every(19).minutes.do(main)
-    print(f"Scheduled to run every 19 minutes. Next run at: {datetime.now() + timedelta(minutes=19)}")
+    schedule.every(1).minutes.do(main)
+    print(f"Scheduled to run every 19 minutes. Next run at: {datetime.now() + timedelta(minutes=1)}")
     
     # Keep running the schedule
     try:
