@@ -62,28 +62,38 @@ def fill_form(driver, wait):
     """Fill and submit the form"""
     try:
         # Handle email recording checkbox
-        checkbox = wait.until(EC.element_to_be_clickable(
-            (By.CSS_SELECTOR, 'div[role="checkbox"]')))
-        if not checkbox.is_selected():
-            checkbox.click()
+        # checkbox = wait.until(EC.element_to_be_clickable(
+        #     (By.CSS_SELECTOR, 'div[role="checkbox"]')))
+        # if not checkbox.is_selected():
+        #     checkbox.click()
+        # print("Handled checkbox")
+
+        checkbox = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, 'div[role="checkbox"]')))
+        if driver.execute_script("return arguments[0].getAttribute('aria-checked')", checkbox) != 'true':
+            driver.execute_script("arguments[0].click();", checkbox)
         print("Handled checkbox")
 
-        # Fill positions dict
+        # Fill positions dict        
         text_field = wait.until(EC.presence_of_element_located(
-            (By.CSS_SELECTOR, 'textarea[aria-label*="Positions dict"]')))
+            (By.CSS_SELECTOR, 'textarea[aria-label="Your answer"]')))
         
-        positions_data = {
-            "team_name": TEAM_NAME,
-            "passcode": PASSCODE
-        }
+        # Prepare the data to enter
+        positions_data = r'{"team_name": TEAM_NAME, "passcode": PASSCODE}'
+        text_to_enter = json.dumps(positions_data, indent=2)
+
+        # Clear the text field if needed
+        driver.execute_script("arguments[0].value = '';", text_field)  # Clear using JavaScript
         
-        text_field.clear()
-        text_field.send_keys(json.dumps(positions_data, indent=2))
+        # Use send_keys to input text
+        text_field.click()  # Ensure focus
+        text_field.send_keys(text_to_enter)
         print("Filled text field")
 
+        # time.sleep(2)
         # Submit form
-        submit_button = wait.until(EC.element_to_be_clickable(
-            (By.CSS_SELECTOR, 'div[role="button"][jsaction*="submit"]')))
+        # submit_button = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'div[role="button"][jsaction*="submit"]')))
+        # submit_button.click()
+        submit_button = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'div[role="button"][aria-label="Submit"]')))
         submit_button.click()
         print("Clicked submit button")
         
