@@ -8,7 +8,9 @@ import time
 import json
 import os
 import pickle
+from vol import *
 from config import *
+import sys
 
 def setup_driver():
     """Set up and return the Chrome WebDriver with appropriate options"""
@@ -58,7 +60,7 @@ def manual_sign_in():
     print("4. The script will save your login session for future use")
     input("Press Enter to start the process...")
 
-def fill_form(driver, wait):
+def fill_form(driver, wait, positions_data):
     """Fill and submit the form"""
     try:
         # Handle email recording checkbox
@@ -78,7 +80,6 @@ def fill_form(driver, wait):
             (By.CSS_SELECTOR, 'textarea[aria-label="Your answer"]')))
         
         # Prepare the data to enter
-        positions_data = r'{"team_name": TEAM_NAME, "passcode": PASSCODE}'
         text_to_enter = json.dumps(positions_data, indent=2)
 
         # Clear the text field if needed
@@ -89,7 +90,7 @@ def fill_form(driver, wait):
         text_field.send_keys(text_to_enter)
         print("Filled text field")
 
-        # time.sleep(2)
+        time.sleep(2)
         # Submit form
         # submit_button = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'div[role="button"][jsaction*="submit"]')))
         # submit_button.click()
@@ -101,7 +102,7 @@ def fill_form(driver, wait):
         print(f"Form filling error: {str(e)}")
         raise
 
-def main():
+def main(positions_data):
     driver = None
     try:
         driver = setup_driver()
@@ -129,7 +130,7 @@ def main():
         
         # Fill and submit form
         print("Filling form...")
-        fill_form(driver, wait)
+        fill_form(driver, wait, positions_data)
         
         print("Waiting for submission confirmation...")
         time.sleep(3)
@@ -145,4 +146,9 @@ def main():
             driver.quit()
 
 if __name__ == "__main__":
-    main()
+    if len(sys.argv) > 1:
+        # Retrieve the data passed as an argument
+        positions_data = sys.argv[1]
+        main(positions_data)
+    else:
+        print("No data received.")
