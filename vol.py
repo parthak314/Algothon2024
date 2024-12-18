@@ -319,7 +319,7 @@ class FinancialAnalysis:
             raise
 
 def gForms(values):
-    subprocess.run(['python', 'main.py', values])
+    subprocess.run(['python', 'gFormAuto.py', values])
 
 def main():
 

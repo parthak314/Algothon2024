@@ -63,13 +63,6 @@ def manual_sign_in():
 def fill_form(driver, wait, positions_data):
     """Fill and submit the form"""
     try:
-        # Handle email recording checkbox
-        # checkbox = wait.until(EC.element_to_be_clickable(
-        #     (By.CSS_SELECTOR, 'div[role="checkbox"]')))
-        # if not checkbox.is_selected():
-        #     checkbox.click()
-        # print("Handled checkbox")
-
         checkbox = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, 'div[role="checkbox"]')))
         if driver.execute_script("return arguments[0].getAttribute('aria-checked')", checkbox) != 'true':
             driver.execute_script("arguments[0].click();", checkbox)
@@ -92,8 +85,6 @@ def fill_form(driver, wait, positions_data):
 
         time.sleep(2)
         # Submit form
-        # submit_button = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'div[role="button"][jsaction*="submit"]')))
-        # submit_button.click()
         submit_button = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'div[role="button"][aria-label="Submit"]')))
         submit_button.click()
         print("Clicked submit button")

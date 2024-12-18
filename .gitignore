@@ -1,2 +1,33 @@
 cookies/
-_pycache_/
+__pycache__/
+
+# Ignore the actual google.json file
+google.json
+
+# Ignore environment files
+.env
+*.env
+
+# Ignore virtual environments
+venv/
+env/
+ENV/
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore log files
+*.log
+
+# Ignore compiled files
+*.so
+*.o
+*.pyc
+
+# Ignore Chrome user data
+path/to/chrome/user/data/
+
+# Ignore IDE specific files
+.vscode/
+.idea/

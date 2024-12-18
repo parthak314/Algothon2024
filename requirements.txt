@@ -1,0 +1,9 @@
+selenium
+slack_sdk
+schedule
+cryptpandas
+prophet
+pandas
+numpy
+google-api-python-client
+google-auth
