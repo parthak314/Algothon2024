@@ -40,7 +40,7 @@ slack_token = "your-slack-token"
 1. Run the Analysis: Execute top.py to start the process. This script will run vol.py to download and analyse the data, and then run gFormAuto.py to submit the results to the Google Form.
 
 ```python
-python top.py
+python vol.py
 ```
 
 2. Manual Sign-In: The first time you run the script, you will need to manually sign in to your Google account. Follow the instructions in the console to complete the sign-in process.
