@@ -45,4 +45,7 @@ python vol.py
 
 2. Manual Sign-In: The first time you run the script, you will need to manually sign in to your Google account. Follow the instructions in the console to complete the sign-in process.
 
+## Authors
+Tejas Bantupalli, Parth Khanna, Arjun Watve
+
 
